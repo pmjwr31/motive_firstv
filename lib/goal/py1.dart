@@ -17,117 +17,117 @@ class _nameinputState extends State<nameinput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset('assets/logo.png',
-            fit: BoxFit.contain,
-            height: 35,)
-          ],
+        appBar: AppBar(
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset('assets/logo.png',
+                fit: BoxFit.contain,
+                height: 35,)
+            ],
+          ),
+          backgroundColor: Colors.white,
         ),
-        backgroundColor: Colors.white,
-      ),
 
         body: Material(
-          child:Center(
-              child : Column(
-                  children:[
-                Container(
-                  margin : EdgeInsets.only(bottom: 40, top:10),
-                  height: 56, width: 323,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(70),),
-                      border: Border.all(
-                        color: const Color(0xffb936DFF),
-                        width: 1,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text("Do not try to be original"),
-
-                  )),
-                Container(
-                  child: SizedBox(
-                    height: 450,
-                    child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            StreamBuilder(
-                              stream: FirebaseFirestore.instance.collection(user!.uid).orderBy("priority").snapshots(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                final docs = snapshot.data!.docs;
-                                final List<Color> colors = [
-                                  Color(0xffbFF6D6D),
-                                  Color(0xffbFFB36D),
-                                  Color(0xffbFFE86D),
-                                  Color(0xffb9CFF6D),
-                                  Color(0xffb6DA8FF)
-                                ];
-                                return ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: docs.length ,
-                                      itemBuilder: (context, index) {
-                                        final item = docs[index];
-                                        return Slidable(
-                                          child: buildListTile(item),
-                                          endActionPane: const ActionPane(
-                                            motion: ScrollMotion(),
-                                            children: [
-                                              SlidableAction(
-                                                // An action can be bigger than the others.
-                                                flex: 1,
-                                                onPressed: updateArchive,
-                                                backgroundColor: Color(0xFF7BC043),
-                                                foregroundColor: Colors.white,
-                                                icon: Icons.archive,
-                                                label: 'Archive',
-                                              ),
-                                              SlidableAction(
-                                                onPressed: deleteList,
-                                                backgroundColor: Colors.red,
-                                                foregroundColor: Colors.white,
-                                                icon: Icons.delete,
-                                                label: 'delete',
-                                              ),],),);});},),],)),),),
-                    Container(
-                      height: 60,
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex:5,
-                              child: Text(" ")
+            child:Center(
+                child : Column(
+                    children:[
+                      Container(
+                          margin : EdgeInsets.only(bottom: 40, top:10),
+                          height: 56, width: 323,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(70),),
+                            border: Border.all(
+                              color: const Color(0xffb936DFF),
+                              width: 1,
+                            ),
                           ),
-                          Expanded(
-                            flex: 3,
-                            child:  FloatingActionButton(
-                              backgroundColor: const Color(0xffb936DFF),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Settingpage()),
-                                );
-                              },
-                              child: Icon(Icons.add,size: 40,),
-                            ),)
-                        ],
-                      ),
-                    )
+                          child: Center(
+                            child: Text("Do not try to be original"),
 
-              ]
+                          )),
+                      Container(
+                        child: SizedBox(
+                          height: 450,
+                          child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  StreamBuilder(
+                                    stream: FirebaseFirestore.instance.collection(user!.uid).orderBy("priority").snapshots(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                                      if (snapshot.connectionState == ConnectionState.waiting){
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      final docs = snapshot.data!.docs;
+                                      final List<Color> colors = [
+                                        Color(0xffbFF6D6D),
+                                        Color(0xffbFFB36D),
+                                        Color(0xffbFFE86D),
+                                        Color(0xffb9CFF6D),
+                                        Color(0xffb6DA8FF)
+                                      ];
+                                      return ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: docs.length ,
+                                          itemBuilder: (context, index) {
+                                            final item = docs[index];
+                                            return Slidable(
+                                              child: buildListTile(item),
+                                              endActionPane: const ActionPane(
+                                                motion: ScrollMotion(),
+                                                children: [
+                                                  SlidableAction(
+                                                    // An action can be bigger than the others.
+                                                    flex: 1,
+                                                    onPressed: updateArchive,
+                                                    backgroundColor: Color(0xFF7BC043),
+                                                    foregroundColor: Colors.white,
+                                                    icon: Icons.archive,
+                                                    label: 'Archive',
+                                                  ),
+                                                  SlidableAction(
+                                                    onPressed: deleteList,
+                                                    backgroundColor: Colors.red,
+                                                    foregroundColor: Colors.white,
+                                                    icon: Icons.delete,
+                                                    label: 'delete',
+                                                  ),],),);});},),],)),),),
+                      Container(
+                        height: 60,
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex:5,
+                                child: Text(" ")
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child:  FloatingActionButton(
+                                backgroundColor: const Color(0xffb936DFF),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Settingpage()),
+                                  );
+                                },
+                                child: Icon(Icons.add,size: 40,),
+                              ),)
+                          ],
+                        ),
+                      )
 
-        )
-          )));
+                    ]
+
+                )
+            )));
 
 
   }
@@ -138,7 +138,7 @@ class _nameinputState extends State<nameinput> {
       backgroundColor: Color(0xffb936DFF),
     ),
     title: Text(item['Title'],
-    style: TextStyle(fontSize: 16),),
+      style: TextStyle(fontSize: 16),),
     onTap: (){},
 
 

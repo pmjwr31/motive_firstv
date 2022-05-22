@@ -24,17 +24,17 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-            color: Colors.white,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset(
-              'assets/whynot.png',
-              fit: BoxFit.cover,
-            )),
-      ],
-    ));
+          alignment: Alignment.center,
+          children: [
+            Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  'assets/motive.png',
+                  fit: BoxFit.cover,
+                )),
+          ],
+        ));
   }
 }

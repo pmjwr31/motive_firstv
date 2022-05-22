@@ -19,7 +19,7 @@ class _NavigationState extends State<NavigationPage> {
     nameinput(),
     schedulePage(),
     ChartPage(),
-    MyPage(),
+    Timetable(),
   ];
   void onTap(int index) {
     setState(() {

@@ -48,6 +48,7 @@ dependencies:
   time_picker_sheet: ^0.0.2+1
   flutter_swipe_action_cell: ^3.0.1
   flutter_slidable: ^1.2.1
+  flutter_timetable_view: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ flutter:
     - assets/time.png
     - assets/logo.png
     - assets/prio.png
+    - assets/logo_2.png
 
 
   # To add assets to your application, add an assets section, like this:
