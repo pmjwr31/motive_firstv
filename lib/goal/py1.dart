@@ -3,20 +3,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'settingpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 class nameinput extends StatefulWidget {
   @override
   State<nameinput> createState() => _nameinputState();
 }
 
 class _nameinputState extends State<nameinput> {
-  final myController = TextEditingController();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
-    Color hexToColor(String code) {
-      return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
-    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -52,7 +51,7 @@ class _nameinputState extends State<nameinput> {
                   )),
                 Container(
                   child: SizedBox(
-                    height: 380,
+                    height: 450,
                     child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,34 +68,38 @@ class _nameinputState extends State<nameinput> {
                                 }
                                 final docs = snapshot.data!.docs;
                                 final List<Color> colors = [
-                                  Color(0xffb003399),
-                                  Color(0xffb1F62C7),
-                                  Color(0xffb7C91DB),
-                                  Color(0xffbC6CEF8),
-                                  Color(0xffbDCE4FF)
+                                  Color(0xffbFF6D6D),
+                                  Color(0xffbFFB36D),
+                                  Color(0xffbFFE86D),
+                                  Color(0xffb9CFF6D),
+                                  Color(0xffb6DA8FF)
                                 ];
-                                return Expanded(
-                                  child: ListView.builder(
+                                return ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: docs.length ,
                                       itemBuilder: (context, index) {
-                                        return Container(
-                                          color: colors[docs[index]['priority']],
-                                          padding: EdgeInsets.all(8),
-                                          child: Text(docs[index]['Title']),
-                                        );
-                                      }
-                                  ),
-                                );
-                              },
-
-                            ),
-                          ],
-
-                        )
-                    ),
-                  ),
-                ),
+                                        final item = docs[index];
+                                        return Slidable(
+                                          child: buildListTile(item),
+                                          endActionPane: const ActionPane(
+                                            motion: ScrollMotion(),
+                                            children: [
+                                              SlidableAction(
+                                                // An action can be bigger than the others.
+                                                flex: 1,
+                                                onPressed: updateArchive,
+                                                backgroundColor: Color(0xFF7BC043),
+                                                foregroundColor: Colors.white,
+                                                icon: Icons.archive,
+                                                label: 'Archive',
+                                              ),
+                                              SlidableAction(
+                                                onPressed: deleteList,
+                                                backgroundColor: Colors.red,
+                                                foregroundColor: Colors.white,
+                                                icon: Icons.delete,
+                                                label: 'delete',
+                                              ),],),);});},),],)),),),
                     Container(
                       height: 60,
                       child: Row(
@@ -120,7 +123,39 @@ class _nameinputState extends State<nameinput> {
                         ],
                       ),
                     )
+
               ]
-        ))));
+
+        )
+          )));
+
+
   }
+
+  Widget buildListTile(item) => ListTile(
+    leading: const CircleAvatar(
+      radius: 5,
+      backgroundColor: Color(0xffb936DFF),
+    ),
+    title: Text(item['Title'],
+    style: TextStyle(fontSize: 16),),
+    onTap: (){},
+
+
+
+  );
+}
+void updateArchive(item) {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
+  firestore.collection(user!.uid).doc('$item').update({
+    "Completion": false
+  });
+
+}
+
+void deleteList(item) {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
+  firestore.collection(user!.uid).doc('item').delete();
 }

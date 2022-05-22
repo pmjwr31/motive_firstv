@@ -12,6 +12,9 @@ class priorityPage extends StatelessWidget {
         actions:[ ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
+              firestore.collection('ToDo').doc('ToDoo2').update({
+                "priority": priority
+              });
             }, child: Text('Save'),
             style: TextButton.styleFrom(
               primary: const Color(0xffb936DFF), backgroundColor: Colors.white,

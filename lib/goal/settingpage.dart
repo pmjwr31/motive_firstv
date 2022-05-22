@@ -39,7 +39,8 @@ class Settingpage extends StatelessWidget {
                   "Title": '$title1',
                   "priority": priority,
                   "category":category,
-                  "time":time
+                  "time":time,
+                  "Completion": false
                 });
                 Navigator.push(
                   context,
